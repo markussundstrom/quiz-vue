@@ -1,6 +1,6 @@
 <template>
     <div class="-z-50 bg-indigo-300 -skew-y-12">
-        <h1 class="text-48 text-bold text-center">QUIZ</h1>
+        <h1 class="text-48 text-bold text-center">&#x2606;QUIZ&#x2606;</h1>
     </div>
     <div class="relative z-50 bg-yellow-200 my-8 mx-16 p-8 gap-8 flex flex-col items-center drop-shadow-lg" v-show="visibility.start">
         <h2 class="text-32">Välkommen till quizet</h2>
@@ -13,16 +13,16 @@
                   @question-answered="scoreAnswer($event)"
                   ></question>
     </div>
-    <div v-show="visibility.result">
-        <h2>Resultat</h2>
-        <p>{{totalPoints}} poäng av {{numQuestions}}</p>
-        <ul>
+    <div class="relative z-50 bg-yellow-200 my-8 mx-16 p-8 flex flex-col drop-shadow-lg items-center" v-show="visibility.result">
+        <h2 class="text-32 text-center">Resultat</h2>
+        <p class="text-32 text-center">{{totalPoints}} poäng av {{numQuestions}}</p>
+        <div class="grid grid-cols-[1fr,3fr] grid-rows-[repeat(7, 1fr)]">
             <category-result v-for="(score, index) in points" 
                              :categoryScore="score" 
                              :category="categories[index]">
             </category-result>
-        </ul>
-        <button @click="initGame">Omspel?</button>
+        </div>
+        <button class="rounded-lg border-2 border-dotted border-black px-4 py-1 hover:bg-black hover:text-yellow-200" @click="initGame">Omspel?</button>
     </div>    
 </template>
 <script>
@@ -36,7 +36,7 @@
         },
         data() {
             return {
-                numQuestions: 35,
+                numQuestions: 4,
                 qIndex: 0,
                 categories: ['Film & TV', 'Geografi', 'Historia', 'Musik', 'Övrigt', 'Vetenskap', 'Sport'],
                 points: [0, 0, 0, 0, 0, 0, 0],
