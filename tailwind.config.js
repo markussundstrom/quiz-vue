@@ -1,4 +1,5 @@
 const plugin = require('tailwindcss/plugin')
+const colors = require('tailwindcss/colors')
 
 module.exports = {
   corePlugins: {
@@ -23,11 +24,21 @@ module.exports = {
       transparent: 'transparent',
       current: 'currentColor',
       white: '#fff',
-      black: '#000'
+      black: '#000',
+      red: colors.red,
+      yellow: colors.yellow,
+      stone: colors.stone,
+      indigo: colors.indigo,
+      green: colors.green
+
+
     },
 
     fontSize: {
       16: '1rem',
+      24: '1.5rem',
+      32: '2rem',
+      48: '3rem'
     },
 
     extend: {

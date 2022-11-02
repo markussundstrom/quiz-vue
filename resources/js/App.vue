@@ -1,10 +1,12 @@
 <template>
-    <h1>QUIZ</h1>
-    <div v-show="visibility.start">
-        <h2>Välkommen till quizet</h2>
-        <button @click="initGame">Starta</button>
+    <div class="-z-50 bg-indigo-300 -skew-y-12">
+        <h1 class="text-48 text-bold text-center">QUIZ</h1>
     </div>
-    <div v-show="visibility.question">
+    <div class="relative z-50 bg-yellow-200 my-8 mx-16 p-8 gap-8 flex flex-col items-center drop-shadow-lg" v-show="visibility.start">
+        <h2 class="text-32">Välkommen till quizet</h2>
+        <button class="rounded-lg border-2 border-dotted border-black px-4 py-1 hover:bg-black hover:text-yellow-200" @click="initGame">Starta</button>
+    </div>
+    <div class="relative z-50 bg-yellow-200 my-8 mx-16 p-8 flex flex-col drop-shadow-lg justify-center" v-show="visibility.question" v-if="questionList.length" >
         <question :questiontext="questionList[qIndex].question"
                   :category="questionList[qIndex].category"
                   :answer="questionList[qIndex].answer"
@@ -34,13 +36,14 @@
         },
         data() {
             return {
-                numQuestions: 4,
+                numQuestions: 35,
                 qIndex: 0,
                 categories: ['Film & TV', 'Geografi', 'Historia', 'Musik', 'Övrigt', 'Vetenskap', 'Sport'],
                 points: [0, 0, 0, 0, 0, 0, 0],
                 totalPoints: 0,
                 visibility: {start: true, question: false, result: false},
-                questionList: [
+                questionList: []
+                /*questionList: [
                     {
                         category: "Geografi",
                         question: "I vilket hav har floden Wisla sitt utlopp?",
@@ -61,18 +64,26 @@
                         question: "Vad heter den sista bokstaven i det grekiska alfabetet?",
                         answer: "Omega"
                     }
-                ]
+                ]*/
             }
         },
         methods: {
-            initGame() {
+            async initGame() {
                 this.points = [0, 0, 0, 0, 0, 0, 0];
                 this.totalPoints = 0;
                 this.qIndex = 0;
-                //FIXME questions
+                console.log(this.questionList);
+                this.questionList.push(...await this.fetchQuestions());
+                console.log(this.questionList);
                 this.visibility.start = false;
                 this.visibility.result = false;
                 this.visibility.question = true;
+            },
+            async fetchQuestions() {
+                const response = await axios.get('http://localhost/questions');
+                console.log('response', response.data);
+                console.log('response2', this.questionList);
+                return response.data;
             },
             scoreAnswer(isCorrect) {
                 if (isCorrect === true) {

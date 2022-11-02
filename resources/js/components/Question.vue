@@ -1,14 +1,21 @@
 <template>
-    <div>
-        <h2>{{category}}</h2>
-        <p>{{questiontext}}</p>
-        <button @click="revealAnswer" v-show="!showAnswer">Visa svar</button>
+    <div class="p-4  flex flex-col items-center">
+        <h2 class="text-24 text-stone-600 text-center mb-4">{{category}}</h2>
+        <p class="mb-8" :class="showAnswer ? 'text-24' : 'text-32'">{{questiontext}}</p>
+        <button class="rounded-lg border-2 border-dotted border-black px-4 py-1 hover:bg-black hover:text-yellow-200" 
+                @click="revealAnswer" v-show="!showAnswer">Visa svar</button>
     </div>
-    <div v-show="showAnswer">
-        <p>{{answer}}</p>
-        <p>Svarade du rätt?</p>
-        <button @click="qAnswered(true)">Ja</button>
-        <button @click="qAnswered(false)">Nej</button>
+    <div class="gap-8 p-4 flex flex-col items-center" v-show="showAnswer">
+        <div class="border-black border-dashed border-2 rounded-xl">
+        <p class="text-32 font-bold px-2">{{answer}}</p>
+        </div>
+        <p class="text-24">Svarade du rätt?</p>
+        <div class="w-1/2 flex flex-row justify-around">
+            <button class="rounded-lg border-2 border-dotted border-black px-4 py-1 hover:bg-green-500 hover:text-white" 
+                    @click="qAnswered(true)">Ja</button>
+            <button class="rounded-lg border-2 border-dotted border-black px-4 py-1 hover:bg-red-500 hover:text-white" 
+                    @click="qAnswered(false)">Nej</button>
+        </div>
     </div>
 </template>
 <script>
