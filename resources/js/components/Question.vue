@@ -1,7 +1,7 @@
 <template>
     <div class="p-4  flex flex-col items-center">
         <h2 class="text-24 text-stone-600 text-center mb-4">{{category}}</h2>
-        <p class="mb-8" :class="showAnswer ? 'text-24' : 'text-32'">{{questiontext}}</p>
+        <p class="mb-8 text-24">{{questiontext}}</p>
         <button class="rounded-lg border-2 border-dotted border-black px-4 py-1 hover:bg-black hover:text-yellow-200" 
                 @click="revealAnswer" v-show="!showAnswer">Visa svar</button>
     </div>
