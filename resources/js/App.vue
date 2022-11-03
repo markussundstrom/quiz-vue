@@ -14,9 +14,9 @@
                   ></question>
     </div>
     <div class="relative z-50 bg-yellow-200 my-8 mx-16 p-8 flex flex-col drop-shadow-lg items-center" v-show="visibility.result">
-        <h2 class="text-32 text-center">Resultat</h2>
+        <h2 class="text-32 text-center font-bold">Resultat</h2>
         <p class="text-32 text-center">{{totalPoints}} poäng av {{numQuestions}}</p>
-        <div class="grid grid-cols-[1fr,3fr] grid-rows-[repeat(7, 1fr)]">
+        <div class="grid grid-cols-2 grid-rows-[repeat(7, 1fr)] gap-x-4 my-8">
             <category-result v-for="(score, index) in points" 
                              :categoryScore="score" 
                              :category="categories[index]">
@@ -36,7 +36,7 @@
         },
         data() {
             return {
-                numQuestions: 4,
+                numQuestions: 35,
                 qIndex: 0,
                 categories: ['Film & TV', 'Geografi', 'Historia', 'Musik', 'Övrigt', 'Vetenskap', 'Sport'],
                 points: [0, 0, 0, 0, 0, 0, 0],
